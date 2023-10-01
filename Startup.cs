@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Homework_ASP
+namespace ASP
 {
     public class Startup
     {
@@ -20,53 +20,48 @@ namespace Homework_ASP
 
         //public IConfiguration Configuration { get; }
 
-
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddSpaStaticFiles();
-            services.AddMvc();
-               
+           
             //services.AddRazorPages();
+            services.AddSpaStaticFiles();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-           
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-            //app.UseStaticFiles();
-            //app.UseMvc(
-            //     r =>
-            //     {
-            //         r.MapRoute(
-            //             name: "default",
-            //             template: "{controller=My}/{action=Index }"
-            //             );
-            //     }
-            //    );
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+            //else
+            //{
+            //    app.UseExceptionHandler("/Error");
+            //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            //    app.UseHsts();
+            //}
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseMvc(
+                r=>
+                {
+                    r.MapRoute(
+                        name:"telephone",
+                        template: "{controller=Telephone}/{action=Index}"
+                        );
+                }
+                );
+            //app.UseRouting();
 
-            app.UseRouting();
+            //app.UseAuthorization();
 
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-            });
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapRazorPages();
+            //});
         }
     }
 }
